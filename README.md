@@ -65,12 +65,25 @@ This project contains some functionalities of RTO website. This project was crea
 ### Client side Initilization
 - Open the client folder
 - Create react app in that folder
+- Test your react app using `npm start`
 
     ```js
     //continue with previos code
         cd client
         ngx create-react-app rto
-        cd ..
+        npm start
+    ```
+
+- Add following dependencies. 
+- Axios is a lightweight HTTP client based similar to a Fetch API. Axios is a promise-based async/await library for readable asynchronous code. We can easily integrate with React, and it is effortless to use in any front-end framework.
+    ```js
+
+        npm install --save react-router-dom
+        npm install --save axios
+    ```
+- Make components and make ready the frontend part of the project separately.
+</br>
+
 ### Server side Initilization
 - Open the server folder
 - Run command `npm init`
@@ -106,6 +119,9 @@ This project contains some functionalities of RTO website. This project was crea
 - Now run app.js file (`node app.js`)
 - Check the url [http://localhost:8082](http://localhost:8082)
 - It will display "Hello world!" output to the screen.
+
+</br>
+
 ### Structure for client side
 - controller folder from where you can controll all logics
 - routes folder from where you can manage url redirecting
@@ -118,4 +134,41 @@ This project contains some functionalities of RTO website. This project was crea
     mkdir models
     mkdir config
     ```
+
+### MongoDB Setup (Localhost)
+- Install Dependency for database connection
+- You need to install mongodb & await
+    
+    ```js
+        npm install mongodb
+        npm install await
+    ```
+- Create file name as db.js
+    ```js
+    //db.js file content
+    const MongoClient = require('mongodb');
+
+    const connect = async function(){
+    await MongoClient.connect('mongodb://localhost:2c7017/', (err, client) => {
+            try{
+                if(err) throw err;
+                console.log("database connected successfully");
+            } 
+            catch(err){
+                console.error(err.message);
+            }
+        });  
+    }
+
+    module.exports = connect;
+    ```
+- In file where you want to access database you can use config file as require argument.
+- You can check wheather given code is working or not by running the `db.js` file but before that you need to add `connect();` befor module.exports to run function.
+
+</br>
+
+### Connection between Frontend and Backend
+- we need to install cors in our back-end (server-side) project. run `npm install` cors in backend project.
+- now start the `npm start` in frontend and `npm run app` in the backend. It should Work!!
+    
 
