@@ -1,18 +1,19 @@
-const MongoClient = require('mongodb').MongoClient
+const { default: mongoose } = require("mongoose");
+
+require("dotenv").config();
+
+const db = process.env.MONGO_URI;
+
+const connect = async () => {
 
 
-const connect = async function(){
-    await MongoClient.connect('mongodb://localhost:27017/', (err, client) => {
-            try{
-                if(err) throw err;
-                console.log("database connected successfully");
-            } 
-            catch(err){
-                console.error(err.message);
-            }
-        });  
+  try {
+    await mongoose.connect(db, { useNewUrlParser: true });
+    console.log("Connected...");
+  }
+  catch (err) {
+    console.log(err);
+  }
 }
-
-connect();
 
 module.exports = connect;
