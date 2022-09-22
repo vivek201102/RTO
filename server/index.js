@@ -12,6 +12,7 @@ Mongooes atlas connection
 const db = require('./config/db.js');
 db();
 
+
 /*
 Some configurations
 */
@@ -27,11 +28,12 @@ const officer_routes = require('./routes/officer.js');
 
 
 /*
-Officer redirection
+Redirect as per requirements
 */
-
 app.use("/officer", officer_routes);
 
+/*
+*/
 app.get('/', (req, res) => res.send('Hello world!'));
 
 app.listen(port, () => {
