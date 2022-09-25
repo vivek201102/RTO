@@ -25,12 +25,15 @@ app.use(express.urlencoded({ extended: true }));
 Reuire for routes...
 */
 const officer_routes = require('./routes/officer.js');
+const agent_routes = require('./routes/agent.js');
 
 
 /*
 Redirect as per requirements
 */
+
 app.use("/officer", officer_routes);
+app.use("/agent", agent_routes);
 
 /*
 */
