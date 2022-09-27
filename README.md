@@ -167,6 +167,50 @@ This project contains some functionalities of RTO website. This project was crea
 
 </br>
 
+### Mongoose Connection (Atlas)
+- Create database with appropriate user.
+- User has to permision for read/write.
+- After that click on connect button of database and choose `connect your application`.
+- Copy the connection string for your application.
+    ```js
+    mongodb+srv://<username>:<password>@<database name>.<your code>.mongodb.net/?retryWrites=true&w=majority
+
+    ```
+- This is like your connection string should be.
+</br>
+- Install mongoose package by `npm i mongoose` or `npm install mongoose`.
+- If you want to use connection string from env variable then you neeed to install dotnev by `npm i dotnev`. (Recommended)
+- Open config.js file to add database configuration.
+    ```js
+  const { default: mongoose } = require("mongoose");
+  require("dotenv").config();
+
+  /*
+  Here you have to set env variable named MONGO_URI as copied connection string from atlas database. You can set your env variable called MONGO_URI as connection string.
+  */
+  
+  const db = process.env.MONGO_URI;
+  
+  const connect = async () => {
+  
+    try {
+      await mongoose.connect(db, { useNewUrlParser: true });
+      console.log("Connected...");
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+  
+  module.exports = connect;
+
+  ```
+- Note : Just use localhost or mongooes connection. Mongoose is cloud base and localhost is for local system.
+</br>
+</br>
+
+
+
 ### Connection between Frontend and Backend
 - we need to install cors in our back-end (server-side) project. run `npm install` cors in backend project.
 - now start the `npm start` in frontend and `npm run app` in the backend. It should Work!!
