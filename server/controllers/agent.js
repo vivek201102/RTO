@@ -1,5 +1,8 @@
 const agent = require('../models/agent.js');
+const token = require('../models/token.js');
 const bcrypt = require("bcryptjs");
+const JWT = require("jsonwebtoken");
+
 
 /*
   Registration of agent
@@ -43,20 +46,28 @@ exports.register = async function(req, res) {
       password: hashedPassword
     });
 
+    let agentInfo;
+
     try {
       //saving data in collection
-      await newAgent.save();
+      agentInfo = await newAgent.save();
+
+      //JWT Signin
+      const token = JWT.sign({ id: agentInfo._id }, process.env.JWT_SECRET);
+
       message = "Agent created successfully";
+
+
     }
 
     catch (error) {
       console.log(error);
     }
+
     //Final response...
-    res.json({ "message": message, "agentInfo": newAgent });
+    res.json({ "message": message, "agentInfo": agentInfo, "token": token });
   }
 }
-
 
 
 /*
@@ -81,8 +92,6 @@ exports.authentication = async function(req, res) {
 }
 
 
-
-
 /*
   Fetching data by id
 */
@@ -98,4 +107,22 @@ exports.getAgentData = async function(req, res) {
   catch (error) {
     console.log(error);
   }
+}
+
+
+exports.resetPassword = async function(req, res) {
+  let email = req.body.email;
+
+  let agentInfo = await agent.findOne({ email });
+
+  if (!agentInfo) {
+    throw new Error("User does not exists");
+  }
+
+  let token = await token.findOne({userId : agentInfo._id})
+  if(token)
+    token.deleteOne();
+
+  let resetToken = crypto.randomBytes(32).toString("hex");
+  const hash = await bcrypt.hash(resetToken, Number(process.env.BCRYPT_SALT));
 }
