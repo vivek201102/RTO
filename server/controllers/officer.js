@@ -1,4 +1,4 @@
-  const officerDb = require("../models/officer");
+const officerDb = require("../models/officer");
 const bcrypt = require("bcryptjs");
 
 /* Register the officer */
@@ -82,6 +82,7 @@ exports.getOfficer = async function(req, res) {
 /* Authentication (login) of officer */
 exports.authOfficer = async function(req, res) {
   //Requesting username and password
+
   const { username, password } = req.body;
 
   let officerData;
@@ -142,11 +143,11 @@ exports.updateUserData = async function(req, res) {
   let userdata = req.body;
   try {
     await officerDb.findByIdAndUpdate(id, userdata)
-    res.json({"message": "Success"})
+    res.json({ "message": "Success" })
   }
   catch (error) {
     console.log(error);
-    res.json({"message": "Error"})
+    res.json({ "message": "Error" })
   }
 }
 
@@ -157,46 +158,43 @@ exports.changePassword = async function(req, res) {
   let newPass = req.body.newPass;
   let id = req.params.id;
 
-  try{
+  try {
     console.log(id)
     console.log(oldPass)
     console.log(newPass)
     let officerinfo = await officerDb.findById(id);
     var isValidate = false;
 
-    if(officerinfo)
-    {
+    if (officerinfo) {
       isValidate = await bcrypt.compare(oldPass, officerinfo.password)
-  
-      if(isValidate)
-      {
+
+      if (isValidate) {
         let hashedPassword;
         hashedPassword = await bcrypt.hash(newPass, 12);
-    
-    
-        userinfo = await officerDb.findByIdAndUpdate(id, {"password": hashedPassword});
-        res.json({"code": 1, "message": "Password updated successfully", "officerData": officerinfo})
+
+
+        userinfo = await officerDb.findByIdAndUpdate(id, { "password": hashedPassword });
+        res.json({ "code": 1, "message": "Password updated successfully", "officerData": officerinfo })
       }
-        
-      else{
-        res.json({"code": 0, "message": "Enter correct old password", "officerData": officerinfo})
+
+      else {
+        res.json({ "code": 0, "message": "Enter correct old password", "officerData": officerinfo })
       }
     }
 
-    else{
-      res.json({"code": -1, "message": "Invalid user id"})
+    else {
+      res.json({ "code": -1, "message": "Invalid user id" })
     }
-    
+
   }
-  catch(error)
-  {
+  catch (error) {
     console.log(error);
-    res.json({"message": "Server Error"})
+    res.json({ "message": "Server Error" })
   }
 }
 
 
 /* Reset password */
 exports.resetPassword = async function(req, res) {
-    
+
 }
