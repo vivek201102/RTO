@@ -7,7 +7,8 @@ const agentSchema = new Schema({
   mobile: { type: String, required: true },
   location: { type: String, required: true },
   username: { type: String, required: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  token: { type: String }
 });
 
 module.exports = mongooes.model("Agent", agentSchema);

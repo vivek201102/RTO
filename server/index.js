@@ -1,14 +1,14 @@
 const express = require('express');
+require("dotenv").config()
 const port = process.env.PORT || 8082;
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const session = require("express-session");
 
 
 /*
-Database connection
-Mongooes atlas connection
+  Database connection
+  Mongooes atlas connection
 */
 const db = require('./config/db.js');
 db();
@@ -20,9 +20,9 @@ Some configurations
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(session({ secret: 'XASDASDA' }));
 
-var ssn;
+
+
 
 /*
 Reuire for routes...

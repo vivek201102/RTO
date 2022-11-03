@@ -53,8 +53,11 @@ exports.register = async function(req, res) {
       agentInfo = await newAgent.save();
 
       //JWT Signin
-      const token = JWT.sign({ id: agentInfo._id }, process.env.JWT_SECRET);
-
+      const token = JWT.sign({ id: agentInfo._id, email: agentInfo.email }, process.env.JWT_SECRET, {
+        expiresIn: "2h"
+      });
+      
+      agentInfo.token = token;
       message = "Agent created successfully";
 
 
@@ -86,15 +89,23 @@ exports.authentication = async function(req, res) {
   if (!agentData) {
     res.status(404).json({ "message": "Agent data not found", "agentInfo": null });
   }
+
   else {
+    const token = JWT.sign({ id: agentData._id, email: agentData.email }, process.env.JWT_SECRET, {
+      expiresIn: "2h"
+    });
+
+    agentData.token = token;
     res.json({ "message": "Agent data found", "agentInfo": agentData });
   }
+
 }
 
 
 /*
   Fetching data by id
 */
+
 exports.getAgentData = async function(req, res) {
   const id = req.params.id;
   try {
@@ -121,8 +132,13 @@ exports.resetPassword = async function(req, res) {
 
   let token = await token.findOne({userId : agentInfo._id})
   if(token)
-    token.deleteOne();
+  {
+    token.deleteOne()
+  }
 
   let resetToken = crypto.randomBytes(32).toString("hex");
   const hash = await bcrypt.hash(resetToken, Number(process.env.BCRYPT_SALT));
+  /*
+    
+  */
 }

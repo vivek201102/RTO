@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import axios from "axios";
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import apiList from './lib/apiList';
+
 
 function App() {
+
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
 
@@ -16,46 +20,58 @@ function App() {
 
   let login = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:8082/api/officer/login", {
-      "username": username,
-      "password": password
+    
+    axios.post(apiList.login, {
+      "username":username,
+      "password":password
     }).then(function(response) {
-      document.getElementById("msg").innerHTML = response.message;
+     
+      document.getElementById("msg").style.display = "block";
+      document.getElementById("msg").innerHTML = "";
+      
+      var alert = document.createElement("span");
+      
+      alert.innerHTML = response.data.message;
+      alert.classList.add("alert");
+      alert.classList.add("alert-primary");
+
+      var clsbtn = document.createElement("button");
+      clsbtn.classList.add("btn-close");
+      clsbtn.addEventListener("click", function(){
+        document.getElementById("msg").style.display = "none";
+      });
+      alert.append(clsbtn);
+      document.getElementById("msg").appendChild(alert);
+
     }, function(error) {
       console.log(error);
     })
   }
 
+
+
+
   return (
     <div className="App">
-      {/* 
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      */}
-      <label id="msg"></label>
+    
       <form onSubmit={login}>
         <div>
           <label>Username: </label>
+          <br />
           <input type="text" name="email" onChange={changeUsername} />
         </div>
         <div>
           <label>Password: </label>
+          <br />
           <input type="password" name="password" onChange={changePassword} />
         </div>
-        <button type="submit">Submit</button>
+          <br />
+        <button type="submit" className='btn btn-primary mb-4'>Submit</button>
       </form>
+
+    <div id ='msg' className='mt-4'>
+
+    </div>
 
     </div>
   );

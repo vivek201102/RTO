@@ -97,7 +97,7 @@ exports.authOfficer = async function(req, res) {
 
   //Officer does not exists
   if (!officerData) {
-    res.status(404).json({ "message": "User not found" });
+    res.json({ "message": "User not found" });
   }
 
   //Officer exists with username
@@ -129,12 +129,12 @@ exports.getUserId = async function(req, res) {
   try {
     let userdata = await officerDb.findOne({ username: username })
     console.log(userdata.id)
-    res.json({ userid: userdata._id });
+    res.json({ "userid": userdata._id });
   }
   catch (error) {
+    res.json({ "userid": 0 });
     console.log(error)
   }
-  res.send({ userid: 0 });
 }
 
 /* Update user's data */
