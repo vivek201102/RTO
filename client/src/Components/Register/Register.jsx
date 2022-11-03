@@ -1,5 +1,5 @@
 import './Register.css'
-import Footer from "../Footer"
+// import Footer from "../Footer"
 
 function Registeration() {
     return (
@@ -9,12 +9,13 @@ function Registeration() {
                 <div className="regform">
                     <form className="form">
                         <input type="text" placeholder='Enter your Name' required />
+                        <input type="text" placeholder='Enter your Username' required />
                         <input type="email" placeholder='Enter your Email' required />
                         <input type="number" placeholder='Enter your Mobile no.' required />
                         <textarea placeholder='Enter your Address' />
                         <select name="usertype" className='user'>
                             <option value={"type"}>Type of User</option>
-                            <option value={"Normal user"}>User</option>
+                            <option value={"Normal user"}>Officer</option>
                             <option value={"Agent"}>Agent</option>
                         </select>
                         <input type="password" placeholder='Password' required />
@@ -27,7 +28,7 @@ function Registeration() {
                     <img src="regnow.jpg" className='logo' alt="reg_logo"></img>
                 </div> */}
             </div>
-            <Footer/>
+            {/* <Footer/> */}
         </>
     );
 }

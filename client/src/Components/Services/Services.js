@@ -4,6 +4,11 @@ import { Link } from "react-router-dom"
 import Dropdown from 'react-dropdown';
 
 export default function Services() {
+//     const [age, setAge] = React.useState('');
+
+//   const handleChange = (event: Selec) => {
+//     setAge(event.target.value as string);
+  
     return (
         <>
             <div className="container whole">
@@ -15,17 +20,7 @@ export default function Services() {
                                 <img src="https://parivahan.gov.in/parivahan//sites/default/files/images/v-learners-license-services.png" alt="Driving School" />
                                 <p class="card-text"><h5>Driving/Learning License:</h5></p>
                                 <p class="card-text">Apply for License</p>
-                                <Dropdown>
-                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                        Apply Now
-                                    </Dropdown.Toggle>
-
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item href="">Action</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
+                                <center><Link to="/licence" class="btn btn-primary">Apply Now</Link></center>
                             </div>
                         </div>
                     </div>
@@ -36,6 +31,22 @@ export default function Services() {
                                 <p class="card-text"><h5>Driving School:</h5></p>
                                 <p class="card-text">Registering for Driving School</p>
                                 <center><Link to="/drivingschool" class="btn btn-primary">Apply Now</Link></center>
+                                {/* <Box sx={{ minWidth: 120 }}>
+                                    <FormControl fullWidth>
+                                        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            value={age}
+                                            label="Age"
+                                            onChange={handleChange}
+                                        >
+                                            <MenuItem value={10}>Ten</MenuItem>
+                                            <MenuItem value={20}>Twenty</MenuItem>
+                                            <MenuItem value={30}>Thirty</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box> */}
                             </div>
                         </div>
                     </div>
