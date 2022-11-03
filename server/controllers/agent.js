@@ -9,7 +9,7 @@ const JWT = require("jsonwebtoken");
 */
 exports.register = async function(req, res) {
   //Fetching data
-  const { name, email, mobile, location, username, password } = req.body;
+  const { name, email, mobile, address, username, password } = req.body;
 
   let existingAgent, message;
 
@@ -29,7 +29,7 @@ exports.register = async function(req, res) {
   if (existingAgent) {
     //If exists...
     message = "Agent with same username or email already exists";
-    res.json({ "message": message, "agentInfo": null });
+    res.json({ "code":-1, "message": message, "agentInfo": null });
   }
 
   else {
@@ -41,7 +41,7 @@ exports.register = async function(req, res) {
       name,
       email,
       mobile,
-      location,
+      address,
       username,
       password: hashedPassword
     });
@@ -53,11 +53,11 @@ exports.register = async function(req, res) {
       agentInfo = await newAgent.save();
 
       //JWT Signin
-      const token = JWT.sign({ id: agentInfo._id, email: agentInfo.email }, process.env.JWT_SECRET, {
-        expiresIn: "2h"
-      });
+      // const token = JWT.sign({ id: agentInfo._id, email: agentInfo.email }, process.env.JWT_SECRET, {
+      //   expiresIn: "2h"
+      // });
       
-      agentInfo.token = token;
+      // agentInfo.token = token;
       message = "Agent created successfully";
 
 
@@ -68,7 +68,7 @@ exports.register = async function(req, res) {
     }
 
     //Final response...
-    res.json({ "message": message, "agentInfo": agentInfo, "token": token });
+    res.json({ "code":0,"message": message, "agentInfo": agentInfo, "token": token });
   }
 }
 

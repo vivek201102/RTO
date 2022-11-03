@@ -11,13 +11,13 @@ function DemoCarousel(){
         <Carousel>
             
             <div>
-                <img src="./rto3.jpg" alt="rto3"/>
+                <img src="./rto3.jpeg" alt="rto3"/>
             </div>
             <div>
-                <img src="./rto1.jpg" alt="rto1"/>
+                <img src="./rto1.jpeg" alt="rto1"/>
             </div>
             <div>
-                <img src="./rto2.jpg" alt="rto2"/>
+                <img src="./rto2.jpeg" alt="rto2"/>
                 
             </div>
         </Carousel>

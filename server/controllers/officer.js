@@ -22,7 +22,7 @@ exports.registerOfficer = async function(req, res) {
 
   if (existUser) {
     message = "Username or Email is already taken.";
-    res.json({ "message": message, "officerInfo": null });
+    res.json({"code":-1, "message": message, "officerInfo": null });
   }
 
 
@@ -58,7 +58,7 @@ exports.registerOfficer = async function(req, res) {
     }
 
     //final
-    res.json({ "message": message, "officerInfo": newOfficer });
+    res.json({"code":0,"message": message, "officerInfo": newOfficer });
   }
 }
 

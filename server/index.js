@@ -4,6 +4,8 @@ const port = process.env.PORT || 8082;
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const http = require('http'); 
+const server = http.createServer(app); 
 
 
 /*
@@ -46,6 +48,6 @@ app.get('/', (req, res) => {
   res.send('Hello world!')  
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on port: http://localhost:${port}`);
 });
