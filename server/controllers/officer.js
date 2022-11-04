@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 /* Register the officer */
 exports.registerOfficer = async function(req, res) {
   //Requesting data
-  const { name, email, mobile, username, password } = req.body;
+  const { name, email, mobile, address, username, password } = req.body;
   let existUser, message;
   try {
     //Check if username and email is already taken
@@ -44,6 +44,7 @@ exports.registerOfficer = async function(req, res) {
       email,
       mobile,
       username,
+      address,
       password: hashedPassword,
     });
 
@@ -54,6 +55,7 @@ exports.registerOfficer = async function(req, res) {
     }
 
     catch (error) {
+      res.json({"code":-1,"message": error.message, "officerInfo": null });
       console.log(error);
     }
 
@@ -89,7 +91,11 @@ exports.authOfficer = async function(req, res) {
 
   //Check if officer exist or not
   try {
-    officerData = await officerDb.findOne({ username: username });
+    officerData = await officerDb.findOne(
+      {
+        $or: 
+        [{ username: username }, {email: username}]
+      });
   }
   catch (error) {
     console.log(error);
@@ -97,7 +103,7 @@ exports.authOfficer = async function(req, res) {
 
   //Officer does not exists
   if (!officerData) {
-    res.json({ "message": "User not found" });
+    res.json({ "code":-1, "message": "User not found" });
   }
 
   //Officer exists with username
@@ -115,11 +121,11 @@ exports.authOfficer = async function(req, res) {
 
     //Authencication successfull
     if (isValidate)
-      res.json({ "message": "Authentication successful", "officerInfo": officerData });
+      res.json({ "code": 0, "message": "Authentication successful", "officerInfo": officerData });
 
     //Password is incorrect
     else
-      res.json({ "message": "Password is incorrect" });
+      res.json({ "code": -1, "message": "Password is incorrect" });
   }
 }
 

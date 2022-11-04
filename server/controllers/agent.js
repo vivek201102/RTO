@@ -78,25 +78,41 @@ exports.register = async function(req, res) {
 */
 exports.authentication = async function(req, res) {
   const { username, password } = req.body;
+  
   let agentData;
   try {
-    agentData = await agent.findOne({ username: username, password: password });
+    agentData = await agent.findOne({$or:[{ username: username} , {email: username }]});
+    
   }
   catch (error) {
+    message = error.message;
     console.log(error);
   }
 
   if (!agentData) {
-    res.status(404).json({ "message": "Agent data not found", "agentInfo": null });
+    res.json({ "message": "Agent data not found", "agentInfo": null });
   }
 
   else {
-    const token = JWT.sign({ id: agentData._id, email: agentData.email }, process.env.JWT_SECRET, {
-      expiresIn: "2h"
-    });
+    let isValidate = false;
 
-    agentData.token = token;
-    res.json({ "message": "Agent data found", "agentInfo": agentData });
+    //Comparing password (bcryption)
+    try {
+      isValidate = await bcrypt.compare(password, agentData.password);
+    }
+
+    catch (error) {
+      console.log(error);
+    }
+
+    if(!isValidate)
+    {
+      res.json({ "code": -1, "message": "Password is incorrect" });
+    }
+    else{
+      res.json({ "code": 0, "message": "Authentication successful", "agentInfo": agentData });
+    }
+    
   }
 
 }
