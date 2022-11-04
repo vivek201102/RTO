@@ -26,10 +26,12 @@ function Login() {
                 if(response.data.code == 0)
                 {
                     console.log(msg);
+                    document.getElementById("alert").style.display = "block";
                     document.getElementById("alert").style.backgroundColor = "#04AA6D";
 
                 }
                 else{
+                    document.getElementById("alert").style.display = "block";
                     document.getElementById("alert").style.backgroundColor = "#f44336";
                 }
 
@@ -38,7 +40,7 @@ function Login() {
             
             })
         }
-        else{
+        else if(inputData.usertype == "Officer"){
             axios.post(apiList.loginOfficer, {
                 username:inputData.email,
                 password: inputData.password
@@ -46,18 +48,29 @@ function Login() {
                 setMsg(response.data.message);
                 if(response.data.code == 0)
                 {
-                    console.log(msg);
+                    document.getElementById("alert").style.display = "block";
                     document.getElementById("alert").style.backgroundColor = "#04AA6D";
 
                 }
                 else{
+                    document.getElementById("alert").style.display = "block";
                     document.getElementById("alert").style.backgroundColor = "#f44336";
                 }
-
+                
             }).catch(function(error){
                 setMsg(error.message);
             })
         }
+        else{
+            document.getElementById("alert").style.backgroundColor = "#f44336";
+            document.getElementById("alert").style.display = "block";
+            setMsg("Please select user type...")
+
+        }
+
+        document.getElementById("closebtn").addEventListener("click",   ()=>{
+            document.getElementById("alert").style.display = "none";
+        })
     }
 
     return (
@@ -65,26 +78,29 @@ function Login() {
            <section className="signin">
            
                 <div class="alert" id="alert">
-                    {(msg === '')?null:
+                    {(msg === '')?<div>
+                        <span class="closebtn" id="closebtn">&times;</span> 
+                        <strong id="str"></strong>
+                    </div>:
                     <div>
-                        <span class="closebtn">&times;</span> 
-                        <strong>{msg}</strong>
+                        <span class="closebtn" id="closebtn">&times;</span> 
+                        <strong id="str">{msg}</strong>
                     </div>
                     }
                 </div>
-                <form className="form">
+                <form className="form" onSubmit={onLogin}>
                  
                     <input type="text" placeholder='Enter your Email / Username' onChange={onChangeInput} name="email" required/>
 
                     <input type="password" name="password" placeholder='Password' onChange={onChangeInput} required/>
 
-                    <select name="usertype" className='user' onChange={onChangeInput}>
-                        <option value={"type"}>Type of User</option>
-                        <option value={"Normal user"}>Officer</option>
+                    <select name="usertype" className='user' onChange={onChangeInput} required>
+                        <option  selected disabled>Type of User</option>
+                        <option value={"Officer"}>Officer</option>
                         <option value={"Agent"}>Agent</option>
                     </select>
 
-                    <input type="submit" onClick={onLogin}  value="Login" style={{ backgroundColor: "#a1eafb" }} />
+                    <input type="submit" value="Login" style={{ backgroundColor: "#a1eafb" }} />
                 </form>
                 </section>
                 
