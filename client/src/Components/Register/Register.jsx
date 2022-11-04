@@ -77,11 +77,11 @@ function Registeration() {
                         setMsg(response.data.message);
                         if(response.data.code == 0)
                         {
-                            document.getElementById("alert").style.background = "#04AA6D";
+                            document.getElementById("alert").style.backgroundColor = "#04AA6D";
                             console.log("user register successfully");
                         }
                         else{
-                            document.getElementById("alert").style.background = "#f44336";
+                            document.getElementById("alert").style.backgroundColor = "#f44336";
                             console.log("user exist with same username or email");
                         }
                     }).catch(function(error){
@@ -89,7 +89,29 @@ function Registeration() {
                     })
             }
             else{
-                // axios.post(apisList.registerOfficer, {inputData})
+                axios.post(apisList.registerOfficer, {
+                    name:inputData.name, 
+                    email:inputData.email, 
+                    mobile: inputData.mobile, 
+                    address: inputData.address, 
+                    username: inputData.username, 
+                    password:inputData.password
+                }).then(function(response){
+                    setMsg(response.data.message);
+
+                    if(response.data.code == 0)
+                    {
+                        document.getElementById("alert").style.backgroundColor = "#04AA6D";
+                        console.log("user register successfully");
+                    }
+                    else{
+                        document.getElementById("alert").style.backgroundColor = "#f44336";
+                        console.log("user exist with same username or email");
+                    }
+
+                }).catch(function(error){
+                    console.log(error);
+                })
             }
         }
     }
@@ -100,11 +122,14 @@ function Registeration() {
 
             <div className="signup container">
                 
+                <div class="alert" id="alert">
                 {(msg === '')?null:
-                <div class="alert">
+                <div>
                     <span class="closebtn">&times;</span> 
-                    <strong>Danger!</strong> {msg}
-                </div>}
+                    <strong>{msg}</strong>
+                </div>
+                }
+                </div>
                 
                 <div className="regform">
                     <form className="form">
