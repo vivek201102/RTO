@@ -8,11 +8,11 @@ function Login() {
     let [inputData, setInputData] = useState("")
     let [msg, setMsg] = useState("")
 
-    let onChangeInput = async (event) => {
-        const name = event.target.name;
-        const val = event.target.value;
-        setInputData(values => ({...values, [name]: val}))
-    }
+    // let onChangeInput = async (event) => {
+    //     const name = event.target.name;
+    //     const val = event.target.value;
+    //     setInputData(values => ({...values, [name]: val}))
+    // }
 
     let onLogin = async (e) => {
         e.preventDefault();
