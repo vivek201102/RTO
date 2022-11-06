@@ -6,4 +6,4 @@ router.post('/register', user_controller.register);
 // router.get('/:id', user_controller.getUserData);
 
 
-module.exports = router;
+module.exports = router;    
