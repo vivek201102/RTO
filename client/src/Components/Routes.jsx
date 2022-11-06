@@ -7,7 +7,7 @@ import { Routes, Route } from 'react-router-dom'
 import Registeration from './Register/Register.jsx';
 import DrivingSchool from './DrivingSchool';
 import Licence from './Licence';
-import SpecialNumber from './SpecialNumber';
+import SpecialNumber from './SpecialNumber/SpecialNumber';
 
 function Home() {
     return (

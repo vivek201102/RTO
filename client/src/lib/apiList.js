@@ -6,6 +6,8 @@ const apiList = {
     loginAgent : `${server}/agent/login`,
     registerOfficer: `${server}/officer/register`,
     registerAgent: `${server}/agent/register`,
+    checkNumber: `${server}/vehicle/checkNo`,
+    addNumber: `${server}/vehicle/addNumber`,
 }
 
 export default apiList;

@@ -40,7 +40,7 @@ Redirect as per requirements
 
 app.use("/api/officer", officer_routes);
 app.use("/api/agent", agent_routes);
-app.use("api/vehicle", vehicle_routes);
+app.use("/api/vehicle", vehicle_routes);
 
 /*
 */
