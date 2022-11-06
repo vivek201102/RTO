@@ -8,22 +8,22 @@ function Login() {
     let [inputData, setInputData] = useState("")
     let [msg, setMsg] = useState("")
 
-    // let onChangeInput = async (event) => {
-    //     const name = event.target.name;
-    //     const val = event.target.value;
-    //     setInputData(values => ({...values, [name]: val}))
-    // }
+    let onChangeInput = async (event) => {
+        const name = event.target.name;
+        const val = event.target.value;
+        setInputData(values => ({...values, [name]: val}))
+    }
 
     let onLogin = async (e) => {
         e.preventDefault();
-        if(inputData.usertype == "Agent")
+        if(inputData.usertype === "Agent")
         {
             axios.post(apiList.loginAgent, {
                 username:inputData.email,
                 password: inputData.password
             }).then(function(response){
                 setMsg(response.data.message);
-                if(response.data.code == 0)
+                if(response.data.code === 0)
                 {
                     console.log(msg);
                     document.getElementById("alert").style.display = "block";
@@ -40,13 +40,13 @@ function Login() {
             
             })
         }
-        else if(inputData.usertype == "Officer"){
+        else if(inputData.usertype === "Officer"){
             axios.post(apiList.loginOfficer, {
                 username:inputData.email,
                 password: inputData.password
             }).then(function(response){
                 setMsg(response.data.message);
-                if(response.data.code == 0)
+                if(response.data.code === 0)
                 {
                     document.getElementById("alert").style.display = "block";
                     document.getElementById("alert").style.backgroundColor = "#04AA6D";

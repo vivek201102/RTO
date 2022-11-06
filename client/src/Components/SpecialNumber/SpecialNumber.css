@@ -1,0 +1,15 @@
+.notAvailable input::placeholder{
+    color:red;
+}
+
+.available input::placeholder{
+    color: green;
+}
+
+.loading input::placeholder{
+    color: black;
+}
+
+.status-available{
+    display: none;
+}
