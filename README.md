@@ -182,29 +182,29 @@ This project contains some functionalities of RTO website. This project was crea
 - If you want to use connection string from env variable then you neeed to install dotnev by `npm i dotnev`. (Recommended)
 - Open config.js file to add database configuration.
     ```js
-  const { default: mongoose } = require("mongoose");
-  require("dotenv").config();
+      const { default: mongoose } = require("mongoose");
+      require("dotenv").config();
 
-  /*
-  Here you have to set env variable named MONGO_URI as copied connection string from atlas database. You can set your env variable called MONGO_URI as connection string.
-  */
-  
-  const db = process.env.MONGO_URI;
-  
-  const connect = async () => {
-  
-    try {
-      await mongoose.connect(db, { useNewUrlParser: true });
-      console.log("Connected...");
-    }
-    catch (err) {
-      console.log(err);
-    }
-  }
-  
-  module.exports = connect;
+      /*
+      Here you have to set env variable named MONGO_URI as copied connection string from atlas database. You can set your env variable called MONGO_URI as connection string.
+      */
 
-  ```
+      const db = process.env.MONGO_URI;
+
+      const connect = async () => {
+
+        try {
+          await mongoose.connect(db, { useNewUrlParser: true });
+          console.log("Connected...");
+        }
+        catch (err) {
+          console.log(err);
+        }
+      }
+
+      module.exports = connect;
+    ```
+
 - Note : Just use localhost or mongooes connection. Mongoose is cloud base and localhost is for local system.
 </br>
 </br>
