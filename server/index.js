@@ -27,11 +27,12 @@ app.use(express.urlencoded({ extended: true }));
 
 
 /*
-Reuire for routes...
+Require for routes...
 */
 const officer_routes = require('./routes/officer.js');
 const agent_routes = require('./routes/agent.js');
 const vehicle_routes = require('./routes/specialNumber.js');
+const user_routes=require('./routes/user.js');
 
 
 /*
@@ -40,7 +41,12 @@ Redirect as per requirements
 
 app.use("/api/officer", officer_routes);
 app.use("/api/agent", agent_routes);
+<<<<<<< HEAD
 app.use("/api/vehicle", vehicle_routes);
+=======
+app.use("api/vehicle", vehicle_routes);
+app.use("/api/user",user_routes);
+>>>>>>> jay
 
 /*
 */
