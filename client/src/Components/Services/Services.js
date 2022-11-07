@@ -28,7 +28,7 @@ export default function Services() {
                                         Apply Now   
                                     </button>
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <Link className="dropdown-item" to="/licence">Apply for Learning license</Link>
+                                        <Link className="dropdown-item" to="/learninglicence">Apply for Learning license</Link>
                                         <Link className="dropdown-item" to="/licence">Apply for Driving licence</Link>
                                     </div>
                                 </div>
