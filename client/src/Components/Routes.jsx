@@ -6,18 +6,17 @@ import ButtonAppBar from './Navbar/Navbar.jsx'
 import { Routes, Route } from 'react-router-dom'
 import Registeration from './Register/Register.jsx';
 import DrivingSchool from './DrivingSchool';
-<<<<<<< HEAD
-import Licence from './Licence';
+
+// import Licence from './Licence';
 import SpecialNumber from './SpecialNumber/SpecialNumber';
-=======
+
 import LearningInfo from './Learninglicence/LearningInfo';
-import SpecialNumber from './SpecialNumber';
 import UserRegister from './Learninglicence/UserRegister';
 import Uploaddoc from './Learninglicence/Uploaddoc';
 import SlotAllocate from './Learninglicence/SlotAllocate';
 import Receipt from './Learninglicence/Receipt';
 
->>>>>>> jay
+
 
 function Home() {
     return (
