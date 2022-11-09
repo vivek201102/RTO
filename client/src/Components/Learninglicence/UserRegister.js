@@ -4,9 +4,12 @@ import validator from "validator";
 import axios from "axios";
 import apisList from "../../lib/apiList"
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 
 function UserRegister() {
+
+    let navigate = useNavigate();
 
     let [inputData, setInputData] = useState("");
     let [errorMsg, setErrorMsg] = useState("");
@@ -20,8 +23,6 @@ function UserRegister() {
         const val = event.target.value;
         setInputData(values => ({ ...values, [name]: val }))
     }
-    console.log("before axios");
-    console.log(inputData);
 
 
     let onChangePass = (event) => {
@@ -73,8 +74,7 @@ function UserRegister() {
         }
         else {
             setPassCheck("")
-            console.log(inputData);
-
+         
             axios.post(
                 apisList.registerUser,
                 {
@@ -94,6 +94,9 @@ function UserRegister() {
                 if (response.data.code == 0) {
                     document.getElementById("alert").style.backgroundColor = "#04AA6D";
                     console.log("user register successfully");
+                    navigate("/learninglicence/uploaddoc", {
+                        state:response.data.UserInfo
+                    })
                 }
                 else {
                     document.getElementById("alert").style.backgroundColor = "#f44336";
@@ -102,8 +105,6 @@ function UserRegister() {
             }).catch(function (error) {
                 console.log(error);
             })
-
-
         }
     }
 
@@ -155,7 +156,7 @@ function UserRegister() {
 
                         <input id="subbtn" type={"submit"} value="Register Now" style={{ backgroundColor: "#a1eafb" }} onClick={RegisterUser} />
 
-                        <Link to="/learninglicence/uploaddoc"><input type="button" value="Continue" style={{ backgroundColor: "#a1eafb" }} className="btn top-space" /></Link>
+                        {/* <Link to="/learninglicence/uploaddoc"><input type="button" value="Continue" style={{ backgroundColor: "#a1eafb" }} className="btn top-space"  /></Link> */}
                     </form>
                 </div>
 

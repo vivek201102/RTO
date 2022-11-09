@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React from 'react';
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import apiList from '../../lib/apiList';
 import "./Login.css"
 
 function Login() {
+
+    const navigate = useNavigate();
     let [inputData, setInputData] = useState("")
     let [msg, setMsg] = useState("")
 
@@ -28,6 +31,7 @@ function Login() {
                     console.log(msg);
                     document.getElementById("alert").style.display = "block";
                     document.getElementById("alert").style.backgroundColor = "#04AA6D";
+                    navigate("/");
 
                 }
                 else{
@@ -73,6 +77,7 @@ function Login() {
         })
     }
 
+    
     return (
         <>
            <section className="signin">
