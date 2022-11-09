@@ -5,7 +5,7 @@ import NoPage from './NoPage';
 import ButtonAppBar from './Navbar/Navbar.jsx'
 import { Routes, Route } from 'react-router-dom'
 import Registeration from './Register/Register.jsx';
-import DrivingSchool from './DrivingSchool';
+import DrivingSchool from './DrivingSchool/DrivingSchool';
 
 // import Licence from './Licence';
 import SpecialNumber from './SpecialNumber/SpecialNumber';
@@ -17,6 +17,7 @@ import SlotAllocate from './Learninglicence/SlotAllocate';
 import Receipt from './Learninglicence/Receipt';
 import OfficerView from './Officer/OfficerView';
 import Viewdetail from './Officer/Viewdetail';
+import Drivinglicence from './Drivinglicence/Drivinglicence';
 
 
 
@@ -39,6 +40,7 @@ function Home() {
                     <Route path="/learninglicence/receipt" element={<Receipt/>}/>
                     <Route path="/officerview" element={<OfficerView/>}/>
                     <Route path="/officerview/viewdetail" element={<Viewdetail/>}/>
+                    <Route path="/drivinglicence" element={<Drivinglicence/>}/>
                 </Routes>
             </div>
         </>
