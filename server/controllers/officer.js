@@ -1,4 +1,5 @@
 const officerDb = require("../models/officer");
+const agentDb = require("../models/agent");
 const bcrypt = require("bcryptjs");
 
 /* Register the officer */
@@ -71,6 +72,7 @@ exports.getOfficer = async function(req, res) {
   try {
     officerData = await officerDb.findById(id);
   }
+
   catch (error) {
     console.log(error);
   }
@@ -204,3 +206,19 @@ exports.changePassword = async function(req, res) {
 exports.resetPassword = async function(req, res) {
 
 }
+
+
+
+
+// exports.demo = async (req, res) => {
+//   let officer = await officerDb.find({});
+//   // console.log(officer);
+//   for(let o of officer)
+//   {
+//     console.log(o);
+//     let data = await agentDb.findById(o._id);
+//     console.log(data);
+
+//   }
+//   res.json({message:"success"});
+// }

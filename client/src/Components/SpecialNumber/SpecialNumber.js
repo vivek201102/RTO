@@ -6,7 +6,6 @@ import apiList from "../../lib/apiList";
  export default function Specialnumber(){
 
     let [status, setStatus] = useState("Not Available");
-    let [msg, setMsg] = useState("");
     let [inputData, setInputData] = useState("");
     let [inputDisable, setInputDisable] = useState(false);
 
@@ -42,12 +41,9 @@ import apiList from "../../lib/apiList";
                 console.log(response.data);
             })
 
-            
+              
         }, 2000)
         
-        // document.getElementById("status").style.placeholder.style.color = "green";
-
-
     }
 
     let bookNumber = async (e) => {
