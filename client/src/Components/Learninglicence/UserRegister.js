@@ -157,6 +157,7 @@ function UserRegister() {
                         <input id="subbtn" type={"submit"} value="Register Now" style={{ backgroundColor: "#a1eafb" }} onClick={RegisterUser} />
 
                         {/* <Link to="/learninglicence/uploaddoc"><input type="button" value="Continue" style={{ backgroundColor: "#a1eafb" }} className="btn top-space"  /></Link> */}
+                        
                     </form>
                 </div>
 

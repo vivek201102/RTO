@@ -12,6 +12,7 @@ const userregisterSchema = new Schema({
   mobile: { type: String, required: true },
   address: { type: String, required: true },
   password: { type: String, required: true },
+  learningno: { type: String, default: null },
   token: { type: String }
 });
 
