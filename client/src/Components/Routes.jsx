@@ -15,6 +15,8 @@ import UserRegister from './Learninglicence/UserRegister';
 import Uploaddoc from './Learninglicence/Uploaddoc';
 import SlotAllocate from './Learninglicence/SlotAllocate';
 import Receipt from './Learninglicence/Receipt';
+import OfficerView from './Officer/OfficerView';
+import Viewdetail from './Officer/Viewdetail';
 
 
 
@@ -35,6 +37,8 @@ function Home() {
                     <Route path="/learninglicence/uploaddoc" element={<Uploaddoc/>}/>
                     <Route path="/learninglicence/slottime" element={<SlotAllocate/>}/>
                     <Route path="/learninglicence/receipt" element={<Receipt/>}/>
+                    <Route path="/officerview" element={<OfficerView/>}/>
+                    <Route path="/officerview/viewdetail" element={<Viewdetail/>}/>
                 </Routes>
             </div>
         </>
