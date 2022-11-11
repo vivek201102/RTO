@@ -5,7 +5,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require('http'); 
-const server = http.createServer(app); 
+const server = http.createServer(app);
+const path = require("path");
 
 //One change... for vivek branch
 /*
@@ -44,7 +45,7 @@ app.use("/api/agent", agent_routes);
 app.use("/api/vehicle", vehicle_routes);
 app.use("api/vehicle", vehicle_routes);
 app.use("/api/user",user_routes);
-
+app.use('/', express.static(path.join(__dirname, '/document')));
 
 /*
 */

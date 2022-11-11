@@ -11,7 +11,7 @@ const bcrypt = require("bcryptjs");
 */
 exports.register = async function (req, res) {
     //Fetching data
-    const { firstname, middlename, lastname, dob, age,dateregister, email, mobile, address, password } = req.body;
+    let { firstname, middlename, lastname, dob, age,dateregister, email, mobile, address, password } = req.body;
 
     let existingUser, message;
 
@@ -33,13 +33,18 @@ exports.register = async function (req, res) {
         //Password hashing
         let hashedPassword;
         hashedPassword = await bcrypt.hash(password, 12);
+        // age = (new Date().getFullYear) - parseInt(dob.slice(0,4));
+        let currentyear = new Date().getFullYear();
+        let dobyear = parseInt(dob.slice(0,4));
+        let ageOf = currentyear - dobyear;
+        
         //Creating new object
         const newUser = new user({
             firstname,
             middlename,
             lastname,
             dob,
-            age,
+            age: ageOf,
             dateregister,
             email,
             mobile,
@@ -111,4 +116,24 @@ exports.resetPassword = async function (req, res) {
     /*
       
     */
+}
+
+exports.getUserInformation = async (req, res) =>{
+    try{
+        let userdatas = []
+        let documentUser = await document.find({isVerified: false});
+        for(u of documentUser)
+        {
+            let userinfo =  await user.findOne({_id: u.userId});
+            let userdata = {...userinfo.toJSON(), aadharcard: u.aadharcard, photo: u.photo, addressproof: u.addressproof, signature:u.signature, isVerified:u.isVerified, varifiedBy: u.varifiedBy };
+            console.log(userdata)
+            userdatas.push(userdata);
+        }
+
+        res.json({code:0, message:"Data fetched", userdatas: userdatas});
+    }
+    catch(error)
+    {
+        res.status(500).json({code:-1, message: "Internal Server Error", error:error.message})
+    }
 }

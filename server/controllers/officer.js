@@ -1,6 +1,8 @@
 const officerDb = require("../models/officer");
-const agentDb = require("../models/agent");
+const userDb = require("../models/userregister");
+const document = require("../models/document")
 const bcrypt = require("bcryptjs");
+
 
 /* Register the officer */
 exports.registerOfficer = async function(req, res) {
@@ -209,16 +211,61 @@ exports.resetPassword = async function(req, res) {
 
 
 
+exports.approveUser = async (req, res) => {
+  const {userid, officerusername } = req.body;
+  console.log("In function" ,userid, officerusername)
+  let documentdata = await document.findOne({userId: userid});
+  if(documentdata)
+  {
+    documentdata.isVerified = true;
+    documentdata.verifiedBy = officerusername;
+    let char = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let result = "";
+    for(let i=0; i<8; i++)
+    {
+      result += char.charAt(Math.floor(Math.random() * char.length))
+    }
+    
+    let llno = "GJ " + new Date().getFullYear().toString() + " " + result;
+    
+    let userinfo = await userDb.findOne({_id: userid});
+    if(userinfo)
+    {
+      userinfo.learningno = llno;
+    }
+    
+    let officerinfo = await officerDb.findOne({username:officerusername});
+    userinfo.save();
+    documentdata.save();
+    
+    res.json({documentdata: documentdata, userinfo:userinfo, officerinfo:officerinfo});
+    
+  }
+  else{
+    res.json({userdata: "User not found"});
+  }
+  
+}
 
-// exports.demo = async (req, res) => {
-//   let officer = await officerDb.find({});
-//   // console.log(officer);
-//   for(let o of officer)
-//   {
-//     console.log(o);
-//     let data = await agentDb.findById(o._id);
-//     console.log(data);
+exports.approveUser = async (req, res) => {
+  const {userid, officerusername } = req.body;
+  console.log("In function" ,userid, officerusername)
+  let documentdata = await document.findOne({userId: userid});
+  if(documentdata)
+  {
+    documentdata.verifiedBy = officerusername;
+    documentdata.isVerified = true;
+    document.isRejected = true;
 
-//   }
-//   res.json({message:"success"});
-// }
+    let officerinfo = await officerDb.findOne({username:officerusername});
+    userinfo.save();
+    documentdata.save();
+
+    res.json({documentdata: documentdata, userinfo:userinfo, officerinfo:officerinfo});
+    
+  }
+  else{
+    res.json({userdata: "User not found"});
+  }
+  
+}

@@ -7,8 +7,9 @@ const documentSchema = new Schema({
     photo: { type: String, required: true },
     addressproof: { type: String, required: true },
     signature: {type: String, required: true},
-    isVarified: {type: Boolean, default: false },
-    varifiedBy: { type: String, default: null}
+    isVerified: {type: Boolean, default: false },
+    verifiedBy: { type: String, default: null },
+    isRejected: { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model("Documents", documentSchema);
