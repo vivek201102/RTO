@@ -1,15 +1,39 @@
-import { useState }  from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios"
+import apiList from "../../lib/apiList";
+ 
+
 export default function OfficerView(){
-    const [users, setUsers] = useState([
-        { id: 1, Name: 'Frank',  email: 'frank.murphy@test.com', apply: 'Learning Licenece' },
-       
-    
-    ]);
+
+    const navigate = useNavigate();
+    let location = useLocation();
+
+    let [users, setUsers] = useState("");
+
+    useEffect(()=>{
+        console.log("In context")
+        axios.get(apiList.getUnverified).then(function(response){
+            setUsers(response.data.userdatas);
+            // setUsers((value) => ({...value, "officerId": location.state._id}));
+        }).catch(function(error){
+
+        })
+    }, [])
+
+
+
+
+    const viewDetail = async (event, user) =>{
+        let sendData = {...user, "officerusername": location.state.username}
+        console.log(sendData);
+        navigate("/officerview/viewdetail", {state: sendData})
+    }
 
     return (
 
         <>
+        
         <div className="container">
             <h3 className="p-3 text-center">User's List</h3>
             <table className="table table-striped table-bordered">
@@ -23,19 +47,16 @@ export default function OfficerView(){
                 </thead>
                 <tbody>
                     {users && users.map(user =>
-                        <tr key={user.id}>
-                            <td>{user.Name}</td>
+                        <tr key={user._id}>
+                            <td>{user.firstname}</td>
                             <td>{user.email}</td>
-                            <td>{user.apply}</td>
-                            <td><Link to="/officerview/viewdetail"><button className="btn btn-primary"> ViewDetails</button></Link></td>
+                            <td>Learning Licence</td>
+                            <td><button className="btn btn-primary" onClick={event => viewDetail(event, user)}>View Details</button></td>
                         </tr>
-                    )}
+                     )}
                 </tbody>
-                
             </table>
         </div>
-        
         </>
     );
-
 }
