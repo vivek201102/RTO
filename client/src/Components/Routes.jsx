@@ -18,6 +18,7 @@ import Receipt from './Learninglicence/Receipt';
 import OfficerView from './Officer/OfficerView';
 import Viewdetail from './Officer/Viewdetail';
 import Drivinglicence from './Drivinglicence/Drivinglicence';
+import Details from './DrivingSchool/Details';
 
 
 
@@ -41,6 +42,7 @@ function Home() {
                     <Route path="/officerview" element={<OfficerView/>}/>
                     <Route path="/officerview/viewdetail" element={<Viewdetail/>}/>
                     <Route path="/drivinglicence" element={<Drivinglicence/>}/>
+                    <Route path="/drivingschool/detail" element={<Details/>}/> 
                 </Routes>
             </div>
         </>

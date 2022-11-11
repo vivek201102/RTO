@@ -9,7 +9,7 @@ const apiList = {
     checkNumber: `${server}/vehicle/checkNo`,
     addNumber: `${server}/vehicle/addNumber`,
     registerUser:`${server}/user/register`,
-    uploadDoc:`${server}/user/uploadDoc`,
+    uploadDoc:`${server}/agent/uploadDoc`,
 
 }
 
