@@ -14,6 +14,7 @@ const apiList = {
     uploadDoc:`${server}/user/uploadDoc`,
     getUnverified: `${server}/user/getAll`,
     verifyUser: `${server}/officer/changeStatus/approve`,
+
 }
 
 export default apiList;
