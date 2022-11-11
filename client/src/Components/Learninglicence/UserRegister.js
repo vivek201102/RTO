@@ -133,7 +133,7 @@ function UserRegister() {
                         <span style={{fontSize:"18px",color:"white"}}>Date of Birth:</span>
                         <input type="date" required name='dob' onChange={onChangeInput} />
 
-                        <input type="number" id='age' placeholder='Age' onChange={onChangeAge} name="age" required />
+                        <input type="number" id='age' placeholder='Age' onChange={onChangeAge} name="age" />
 
                         {(checkAge === '') ? null : <span style={{ fontSize: 12, color: "white" }}>{checkAge}</span>}
 
@@ -157,6 +157,7 @@ function UserRegister() {
                         <input id="subbtn" type={"submit"} value="Register Now" style={{ backgroundColor: "#a1eafb" }} onClick={RegisterUser} />
 
                         {/* <Link to="/learninglicence/uploaddoc"><input type="button" value="Continue" style={{ backgroundColor: "#a1eafb" }} className="btn top-space"  /></Link> */}
+                        
                     </form>
                 </div>
 
