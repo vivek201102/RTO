@@ -74,7 +74,7 @@ export default function LearningInfo() {
                                         </div>
                                     </div>
                                     <div className="col-md-12 top-space text-center">
-                                        <Link to="/learninglicence/fillregisterdetails"><input type="button" value="Continue" style={{backgroundColor:"#59b565"}} className="btn top-space" /></Link>
+                                        <Link to="/learninglicence/fillregisterdetails"><input type="button" value="Continue" style={{backgroundColor:"#59b565"}} className="btn me-3 top-space" /></Link>
                                         <Link to="/"><input type="button" value="Home" style={{backgroundColor:"#59b565"}}  className="btn top-space" /></Link>
                                     </div>
                                     </div>

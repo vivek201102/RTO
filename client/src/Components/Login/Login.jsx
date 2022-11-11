@@ -31,7 +31,7 @@ function Login() {
                     console.log(msg);
                     document.getElementById("alert").style.display = "block";
                     document.getElementById("alert").style.backgroundColor = "#04AA6D";
-                    navigate("/");
+                    navigate("/drivingschool",{state:response.data.agentInfo});
 
                 }
                 else{
@@ -54,7 +54,7 @@ function Login() {
                 {
                     document.getElementById("alert").style.display = "block";
                     document.getElementById("alert").style.backgroundColor = "#04AA6D";
-                    navigate("/officerview");
+                    navigate("/officerview" , {state: response.data.officerInfo});
 
                 }
                 else{
@@ -96,7 +96,7 @@ function Login() {
                 </div>
                 <form className="form" onSubmit={onLogin}>
                  
-                    <input type="text" placeholder='Enter your Email / Username' onChange={onChangeInput} name="email" required/>
+                    <input type="text"  placeholder='Enter your Email / Username' onChange={onChangeInput} name="email" required/>
 
                     <input type="password" name="password" placeholder='Password' onChange={onChangeInput} required/>
 
