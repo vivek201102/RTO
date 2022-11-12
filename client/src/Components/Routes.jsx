@@ -33,7 +33,7 @@ function Home() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Registeration />} />
                     <Route path="*" element={<NoPage />} />
-                    <Route path="/learninglicence" element={<LearningInfo />} />
+                    <Route path="/learninglicence/info" element={<LearningInfo />} />
                     <Route path="/drivingschool" element={<DrivingSchool />} />
                     <Route path="/specialnumber" element={<SpecialNumber />} />
                     <Route path="/learninglicence/fillregisterdetails" element={<UserRegister/>}/>

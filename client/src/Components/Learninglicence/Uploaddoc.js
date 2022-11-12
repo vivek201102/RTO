@@ -33,7 +33,7 @@ function Uploaddoc() {
         }).then(function(response){
             if(response.data.code == 0)
             {
-                navigate("/learninglicence/slottime")
+                navigate("/learninglicence/slottime", {state: response.data.docdata})
             }
             else{
 
