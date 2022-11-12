@@ -12,9 +12,12 @@ const apiList = {
     addNumber: `${server}/vehicle/addNumber`,
     registerUser:`${server}/user/register`,
     uploadDoc:`${server}/user/uploadDoc`,
+    uploadDocAgent: `${server}/agent/uploadDoc`,
     getUnverified: `${server}/user/getAll`,
     verifyUser: `${server}/officer/changeStatus/approve`,
-
+    rejectUser: `${server}/officer/changeStatus/reject`,
+    authuser: `${server}/user/login`,
+    bookSlot: `${server}/user/bookslot`,
 }
 
 export default apiList;

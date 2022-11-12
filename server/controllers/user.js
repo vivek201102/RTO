@@ -137,3 +137,55 @@ exports.getUserInformation = async (req, res) =>{
         res.status(500).json({code:-1, message: "Internal Server Error", error:error.message})
     }
 }
+
+exports.getUser = async function(req, res){
+    let {mobile, password} = req.body;
+
+    try{
+        let userdata = await user.findOne({mobile, mobile});
+        if(userdata)
+        {
+            let isValidate = false;
+            isValidate = await bcrypt.compare(password, userdata.password);
+
+            if(isValidate)
+            {
+                let documentData = await document.findOne({userId: userdata._id})
+                res.json({code:0, message:"Authenticated", documentData:documentData})
+            }
+            else{
+                res.json({code:1, message:"Password is incorrect"})
+            }
+
+        }
+        else{
+            res.json({code:-1, message:"User not found"})
+        }
+    }
+    catch(error){
+        res.json({code:-1, message: error.message})
+    }
+}
+
+
+exports.bookSlot = async (req, res) => {
+    let {docId, userId, slotDate, slotTime, licenceType } = req.body;
+
+    try{
+        let documentData = await document.findOne({_id: docId});
+
+        documentData.slotDate = slotDate;
+        documentData.slotTime = slotTime;
+        documentData.licenceType = licenceType;
+ 
+        documentData = await documentData.save();
+
+        let userinfo = await user.findOne({_id: userId});
+
+        res.json({code: 0, message:"slot updated successfully", documentData:documentData, userinfo: userinfo});
+
+    }
+    catch(error){
+        res.json({code:-1, message:error.message})
+    }
+}

@@ -30,12 +30,20 @@ export default function(){
         }).catch(function(error){
             alert(error.message);
         })
-
-
-    }
-
-    const rejectUser = async (e) => {
         
+        
+    }
+    
+    const rejectUser = async (e) => {
+        e.preventDefault();
+        axios.post(apiList.rejectUser, {
+            userid:user._id,
+            officerusername:user.officerusername
+        }).then(function(response){
+            navigate("/officerview", {state: response.data.officerinfo});
+        }).catch(function(error){
+
+        })
     }
 
     
@@ -124,10 +132,10 @@ export default function(){
                     <button className="btn btn-success" onClick={approveUser}>Approved</button>
                 </div>
                 <div className="col-3">
-                    <button className="btn btn-danger" >Decline</button>
+                    <button className="btn btn-danger" onClick={rejectUser}>Decline</button>
                 </div>
               </div>
-            </form>
+            </form> 
 
         </Box>
       </Container>

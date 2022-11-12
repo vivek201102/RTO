@@ -1,16 +1,85 @@
 // import UserRegister from "./UserRegister"
-import { Link } from "react-router-dom"
-import { useState } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import axios from "axios";
+import apiList from "../../lib/apiList";
 
 
 export default function SlotAllocate(){
+    let navigate = useNavigate();
+    let location = useLocation();
+    let [userVerified, setUserVerified] = useState(false)
+    let [slotBooked, setslotBooked] = useState(false)
+    let [inputData, setInputData] = useState("");
+    let [bookSlotDate, setBookSlotDate] = useState("");
+    // let options = [{name: "MCWOG", id: 1}, {name: "MCWG", id: 2}, {name: "LMV", id: 3}, {name: "MGV", id: 4}, {name: "HMV", id: 5}, {name: "HTV", id: 6}]
 
-    let [userVerified, setUserVerified] = useState(true )
-    let options = [{name: "MCWOG", id: 1}, {name: "MCWG", id: 2}, {name: "LMV", id: 3}, {name: "MGV", id: 4}, {name: "HMV", id: 5}, {name: "HTV", id: 6}]
+    let [isRejected, setIsRejected] = useState(false);
 
+    let onBooking = async (e) => {
+        e.preventDefault();
+        let slot;
+
+        if(inputData.slotDate == undefined)
+        {
+            console.log("Please select slot date");
+            return;
+        }
+
+        if(inputData.slotTime == "first") slot = "10 am - 12 pm";
+        else if(inputData.slotTime == "second") slot = "1 pm - 3 pm";
+        else if(inputData.slotTime == "second") slot = "3 pm - 5 pm";
+        else if(inputData.slotTime == undefined){
+            console.log("Please select slot...")
+            return;
+        }
+
+              
+        if(inputData.licenceType == undefined)
+        {
+            console.log("Please select licence type")
+            return;
+        }
+        
+        axios.post(apiList.bookSlot, {
+            docId: location.state._id, 
+            userId: location.state.userId,
+            slotDate: inputData.slotDate,
+            slotTime: slot,
+            licenceType: inputData.licenceType
+        }).then(function(response){
+            if(response.data.code == 0)
+            {
+                alert("Slot booked successfully...");
+                setBookSlotDate(inputData.slotDate);
+                setslotBooked(true);
+                // navigate("/learninglicence/slottime", {state: location.state});
+            }
+        }).catch(function(error){
+            
+        })
     
+        
+    }
 
-    let onChangeDate = function(){
+    let onChangeInput = (event) => {
+        const name = event.target.name;
+        const val = event.target.value;
+        setInputData(values => ({...values, [name]: val}))
+    }
+
+
+    useEffect(()=>{
+        setUserVerified(location.state.isVerified);
+        setIsRejected(location.state.isRejected);
+        if(location.state.slotDate)
+        {
+            setslotBooked(true);
+            setBookSlotDate(location.state.slotDate);
+        }
+    }, [])
+
+    let onChangeDate = function(event){
         var dtToday = new Date();
         
         var month = dtToday.getMonth() + 1;
@@ -23,8 +92,7 @@ export default function SlotAllocate(){
         
         var maxDate = year + '-' + month + '-' + day;
     
-        // or instead:
-        // var maxDate = dtToday.toISOString().substr(0, 10);
+        
     
         document.getElementById('txtDate').setAttribute("min", maxDate)
 
@@ -32,11 +100,44 @@ export default function SlotAllocate(){
         {
             document.getElementById('txtDate').value = maxDate;
         }
+        const name = event.target.name;
+        const val = event.target.value;
+        setInputData(values => ({...values, [name]: val}))
     };
+
+    let changeDate = (e) => {
+        e.preventDefault();
+        setslotBooked(false);
+    }
 
     return(
         <>
         {(userVerified)?
+            (isRejected) ?<> 
+                <div className="card container mt-5 w-50 shadow-lg">
+                
+                <div class="" style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                    <strong>Sorry!!!</strong>
+                    <p>Your document has not been approved by our officer</p>
+                    <p>Please contact to RTO office near you</p>
+                </div>
+
+            </div>
+            
+            </> : (slotBooked) ? 
+            <> 
+                <div className="card container mt-5 w-50 shadow-lg">
+                
+                <div class="text-center my-5">
+                    <strong>Notification</strong>
+                    <p>You have already booked your slot</p>
+                    <p>Please go to RTO office to complete you test</p>
+                    <p>You have booked slot at {bookSlotDate}</p>
+                    <button className="btn btn-success" onClick={changeDate}>Change Date</button>
+                </div>
+
+            </div>
+            </> :
             <center>
                 <div className="card container mt-5 w-50 shadow-lg">
                 
@@ -49,22 +150,33 @@ export default function SlotAllocate(){
                 </div>
                     <div class="card container mt-5 w-50 shadow-lg">
                     <div class="">
-                        <from>
+                        <from className="">
 
                         <strong style={{textDecoration:"underline"}}>Book Slote</strong>
                         <br />
                         <label>Choose the Date</label>
                         <br />
-                        <input type="date" id="txtDate" onChange={onChangeDate}/>
+                        <input type="Date" name="slotDate" id="txtDate" onChange={onChangeDate}/>
                         <br />
-                        <select name="timeslote" className="user"  required>
+                        <select name="slotTime" className="user" onChange={onChangeInput}  required>
                             <option disabled selected>Select Time</option>
                             <option value="first">10 am - 12 pm</option>
                             <option value="second">1 pm - 3 pm</option>
                             <option value="third">3 pm - 5 pm</option>
                         </select>
-                        
-                            
+
+                        <select name="licenceType" className="user" onChange={onChangeInput}  required>
+                            <option value="None" disabled selected>Select Type</option>
+                            <option value="MCWOG">MCWOG</option>
+                            <option value="MCWG">MCWG</option>
+                            <option value="LMV">LMV</option>
+                            <option value="HMV">HMV</option>
+                            <option value="HTV">HTV</option>
+                        </select>
+                        <br />
+                        <input type="text" className="my-2" value="Rs. 1500" disabled/>
+                           <br /> 
+                        <button className="btn btn-success mt-4 mb-4" onClick={onBooking}>submit</button>
                         </from>
                     </div>
 

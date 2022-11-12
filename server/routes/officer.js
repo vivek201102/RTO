@@ -8,6 +8,7 @@ router.get('/findbyuname/:uname', officer_controller.getUserId);
 router.post('/updateuser/:id', officer_controller.updateUserData);
 router.post('/updatepass/:id', officer_controller.changePassword);
 router.post('/changeStatus/approve', officer_controller.approveUser);
+router.post('/changeStatus/reject', officer_controller.rejectUser);
 // router.get('/demo', officer_controller.demo);
 
 
