@@ -31,7 +31,7 @@ function Login() {
                     console.log(msg);
                     document.getElementById("alert").style.display = "block";
                     document.getElementById("alert").style.backgroundColor = "#04AA6D";
-                    navigate("/drivingschool",{state:response.data.agentInfo});
+                    navigate("/drivingschool/info",{state:response.data.agentInfo});
 
                 }
                 else{

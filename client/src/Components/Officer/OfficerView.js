@@ -41,6 +41,12 @@ export default function OfficerView(){
         navigate("/officerview/viewdetail", {state: sendData})
     }
 
+    const viewAgentDetail = async (event, agent) =>{
+        let sendData = {...agent, "officerusername": location.state.username}
+        console.log(sendData);
+        navigate("/officerview/viewAgentdetail", {state: sendData})
+    }
+
     return (
 
         <>
@@ -72,7 +78,11 @@ export default function OfficerView(){
                             <td>{agent.name}</td>  
                             <td>{agent.email}</td>
                             <td>Driving School</td>
+
+                            <td><button className="btn btn-primary" onClick={event => viewAgentDetail(event, agent)}>View Details</button></td>
+
                             <td><button className="btn btn-primary" onClick={event => viewDetail(event, agent)}>View Details</button></td>
+
                         </tr>
                      )}
                 </tbody>

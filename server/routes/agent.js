@@ -33,7 +33,14 @@ const fileUpload = multer({
 router.post('/register', agent_controller.register);
 router.post('/login', agent_controller.authentication);
 router.post('/uploaddoc',fileUpload.array("files",3),agent_controller.uploadDocument);
+
+router.get('/drivingschool', agent_controller.getApplication);
+router.post('/changestatus/approve', agent_controller.approveAgent);
+router.post('/changestatus/reject', agent_controller.rejectAgent);
+router.post('/checkAgent', agent_controller.getAgentInfo);
+
 router.get('/drivingschool', agent_controller.getApplication)
+
 // router.get('/:id', agent_controller.getAgentData);
 
 
