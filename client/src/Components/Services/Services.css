@@ -5,6 +5,11 @@
     color: var(--secondary-color);
     
 }
+
+.hov:hover{
+    cursor: pointer;
+}
+
 :root {
     --link-color: #6C4BB4;
     --primary-color-opacity: #e9d5ff;

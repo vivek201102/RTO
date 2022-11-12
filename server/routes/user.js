@@ -6,7 +6,7 @@ const path = require("path")
 const documentStorage = multer.diskStorage({
     // destination: "./user/document",
     destination:(req, file, cb)=> {
-      cb(null, "./document")
+      cb(null, "./document/user")
     },
     filename:(req, file, cb) =>
     {
@@ -35,8 +35,7 @@ router.post('/uploadDoc', fileUpload.array("files", 4) ,user_controller.uploadDo
 
 router.post('/register', user_controller.register);
 router.get('/getAll', user_controller.getUserInformation);
-// router.post('/login', user_controller.authentication);
-// router.get('/:id', user_controller.getUserData);
-
+router.post('/login', user_controller.getUser);
+router.post('/bookslot', user_controller.bookSlot);
 
 module.exports = router;    

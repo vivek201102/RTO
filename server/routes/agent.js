@@ -6,7 +6,7 @@ const path=require("path");
 const documentStorage = multer.diskStorage({
     // destination: "./user/document",
     destination:(req, file, cb)=> {
-      cb(null, "./server/document/agent")
+      cb(null, "./document/agent")
     },
     filename:(req, file, cb) =>
     {
