@@ -1,8 +1,7 @@
 const agent = require('../models/agent.js');
 const token = require('../models/token.js');
 const bcrypt = require("bcryptjs");
-const JWT = require("jsonwebtoken");
-const path=require("path");
+const officerDb = require("../models/officer");
 const agentdoc = require('../models/agentdoc.js');
 
 
@@ -151,19 +150,6 @@ exports.authentication = async function(req, res) {
   Fetching data by id
 */
 
-exports.getAgentData = async function(req, res) {
-  const id = req.params.id;
-  try {
-    let agentData = await agent.findById(id);
-    if (agentData)
-      res.json({ "agentInfo": agentData });
-    else
-      res.json({ "agentInfo": null });
-  }
-  catch (error) {
-    console.log(error);
-  }
-}
 
 
 exports.resetPassword = async function(req, res) {
@@ -193,20 +179,90 @@ exports.getApplication = async(req, res) => {
   console.log("In function")
   let sendData = []
   try{
-    let agentDocDatas =  await agentdoc.find({});
+    let agentDocDatas =  await agentdoc.find({isVerified: false});
     for(let agentDocData of agentDocDatas)
     {
-      console.log(agentDocData);
       let agentInfo = await agent.findOne({_id: agentDocData.agentId})
-      console.log(agentInfo);
       let result = {...agentInfo.toJSON(), ...agentDocData.toJSON()}
-      sendData.push(result);
-      console.log("------------------------------")
+      sendData.push(result); 
     }
     res.json({message:"Success", sendData:sendData})
   }
   catch(error)
   {
     res.json({code:-1, message:"server error..."})
+  }
+}
+
+exports.approveAgent = async (req, res) => {
+  const { docid, agentid, officerusername} = req.body;
+  try{
+    let agentdocdata = await agentdoc.findOne({_id: docid});
+    agentdocdata.isVerified = true;
+    agentdocdata.verifiedBy = officerusername;
+    await agentdocdata.save();
+
+    let officerinfo = await officerDb.findOne({username: officerusername});
+    res.json({code:0, message:"Success", agentdocdata:agentdocdata, officerinfo});
+  }
+  catch(error)
+  {
+    res.json({code:error.code, message:error.message})
+  }
+}
+
+
+exports.rejectAgent = async (req, res) => {
+  const { docid, agentid, officerusername} = req.body;
+  try{
+    let agentdocdata = await agentdoc.findOne({_id: docid});
+    agentdocdata.isVerified = true;
+    agentdocdata.verifiedBy = officerusername;
+    agentdocdata.isRejected = true;
+    await agentdocdata.save();
+    let officerinfo = await officerDb.findOne({username: officerusername});
+    res.json({code:0, message:"Success", agentdocdata:agentdocdata, officerinfo:officerinfo})
+  }
+  catch(error)
+  {
+    res.json({code:error.code, message:error.message})
+  }
+
+}
+
+exports.getAgentInfo = async (req, res) => {
+  console.log("Checking")
+  let {mobile, password } = req.body;
+  try{
+    let agentInfo = await agent.findOne({mobile: mobile});
+    console.log(agentInfo)
+    let isValidate = false;
+    if(agentInfo)
+    {
+      isValidate = await bcrypt.compare(password, agentInfo.password);
+      
+      if(isValidate)
+      {
+        let docData = await agentdoc.findOne({agentId:agentInfo._id});
+        if(docData)
+        {
+          res.json({code:0, message:"Authenticated", agentInfo:agentInfo, docData:docData});
+        }
+        else{
+          res.json({code:-1, message:"Authenticated But Application not found", agentInfo:agentInfo, docData});
+        }
+      }
+      else{
+        res.json({code:-1, message:"Password Incorrect"});
+      }
+    }
+    else{
+
+      res.json({code:-1, message:"Agent not found"});
+    }
+  }
+  catch(error)
+  {
+    res.json({code:-1, message:"Server error..."})
   }
 }

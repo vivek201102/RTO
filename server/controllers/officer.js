@@ -169,9 +169,7 @@ exports.changePassword = async function(req, res) {
   let id = req.params.id;
 
   try {
-    console.log(id)
-    console.log(oldPass)
-    console.log(newPass)
+    
     let officerinfo = await officerDb.findById(id);
     var isValidate = false;
 

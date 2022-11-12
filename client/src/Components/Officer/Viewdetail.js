@@ -108,18 +108,18 @@ export default function(){
                             <label className="label" name="document">Documents:</label>
                             
                             <span className="ms-2 " >
-                                <a href={`${apiList.serverLink}${user.aadharcard}`} target="_blank" className='text-decoration-none text-reset'>Aadhar Card</a>
+                                <a href={`${apiList.serverLink}user/${user.aadharcard}`} target="_blank" className='text-decoration-none text-reset'>Aadhar Card</a>
                             </span>
                             
                             <span className="ms-2 ">
-                                <a href={`${apiList.serverLink}${user.photo}`} target="_blank" className='text-decoration-none text-reset'>Photograph</a>
+                                <a href={`${apiList.serverLink}user/${user.photo}`} target="_blank" className='text-decoration-none text-reset'>Photograph</a>
                             </span>
                             
-                            <span className="ms-2"><a href={`${apiList.serverLink}${user.addressproof}`} className='text-decoration-none text-reset' target="_blank">Address Proof</a>
+                            <span className="ms-2"><a href={`${apiList.serverLink}user/${user.addressproof}`} className='text-decoration-none text-reset' target="_blank">Address Proof</a>
                             </span>
 
                             <span className="ms-2">
-                                <a href={`${apiList.serverLink}${user.signature}`} className='text-decoration-none text-reset' target="_blank">Signature</a>
+                                <a href={`${apiList.serverLink}user/${user.signature}`} className='text-decoration-none text-reset' target="_blank">Signature</a>
                             </span>
 
                             <span className="ms-2"><a href=""></a></span>

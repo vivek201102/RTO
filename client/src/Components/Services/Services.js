@@ -12,6 +12,10 @@ export default function Services() {
         navigate("/learninglicence");
     }
 
+    let onCheckStatusSchool = async () => {
+        navigate("/drivingschool");
+    }
+
     return (
         <>
             <div className="container whole">
@@ -44,7 +48,22 @@ export default function Services() {
                                 <img src="https://parivahan.gov.in/parivahan//sites/default/files/images/v-driving-school-license.png" alt="Driving School" />
                                 <h5><p className="card-text">Driving School:</p></h5>
                                 <p className="card-text">Registering for Driving School</p>
-                                <center><Link to="/drivingschool" className="btn btn-primary">Apply Now</Link></center>
+                                <center>
+                                   
+                                
+                                    <div className="dropdown">
+                                    <button className="btn btn-secondary dropdown-toggle bg-primary"  type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Apply Now   
+                                    </button>
+                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <Link to="/drivingschool/info" className="dropdown-item">Apply for Driving School</Link>
+                                        <div className="dropdown-item hov" onClick={onCheckStatusSchool}>Status of Driving School</div>
+                                        
+                                    </div>
+                                </div>
+                                
+                                
+                                </center>
                             </div>
                         </div>
                     </div>
@@ -54,7 +73,9 @@ export default function Services() {
                                 <img src="https://parivahan.gov.in/parivahan//sites/default/files/images/v-fancy-number-allocation.png" alt="Driving School" />
                                 <h5><p className="card-text">Special Number:</p></h5>
                                 <p className="card-text">Apply for Special No. of your Vehicle</p>
-                                <center><Link to="/specialnumber" className="btn btn-primary">Apply Now</Link></center>
+                                <center>
+                                    <Link to="/specialnumber" className="btn btn-primary">Apply Now</Link>
+                                </center>
                             </div>
                         </div>
                     </div>
