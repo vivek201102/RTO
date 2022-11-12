@@ -32,7 +32,7 @@ const fileUpload = multer({
 
 
 router.post('/uploadDoc', fileUpload.array("files", 4) ,user_controller.uploadDocument);
-
+router.post('/getDriving',user_controller.getDriving)
 router.post('/register', user_controller.register);
 router.get('/getAll', user_controller.getUserInformation);
 router.post('/login', user_controller.getUser);
