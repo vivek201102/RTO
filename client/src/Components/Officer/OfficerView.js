@@ -10,15 +10,26 @@ export default function OfficerView(){
     let location = useLocation();
 
     let [users, setUsers] = useState("");
+    let [agents, setAgents] = useState("");
 
     useEffect(()=>{
-        console.log("In context")
         axios.get(apiList.getUnverified).then(function(response){
             setUsers(response.data.userdatas);
             // setUsers((value) => ({...value, "officerId": location.state._id}));
         }).catch(function(error){
+            console.log(error.message);
+        });
 
+        console.log("In effect")
+        axios.get(apiList.drivingApp).then(function(response){
+            setAgents(response.data.sendData);
         })
+       
+        
+        
+
+        console.log(agents);
+
     }, [])
 
 
@@ -52,6 +63,16 @@ export default function OfficerView(){
                             <td>{user.email}</td>
                             <td>Learning Licence</td>
                             <td><button className="btn btn-primary" onClick={event => viewDetail(event, user)}>View Details</button></td>
+                        </tr>
+                     )}
+                </tbody>
+                <tbody>
+                    {agents && agents.map(agent =>
+                        <tr key={agent._id}>
+                            <td>{agent.name}</td>  
+                            <td>{agent.email}</td>
+                            <td>Driving School</td>
+                            <td><button className="btn btn-primary" onClick={event => viewDetail(event, agent)}>View Details</button></td>
                         </tr>
                      )}
                 </tbody>
