@@ -2,11 +2,13 @@ import { useState } from 'react';
 import './Register.css'
 import validator from "validator";
 import axios from "axios";
+import {useNavigate} from "react-router-dom"
 import apisList from "../../lib/apiList"
 // import 'bootstrap/dist/css/bootstrap.min.css'
 // import Footer from "../Footer"
 
 function Registeration() {
+    let navigate = useNavigate();
 
     let [inputData, setInputData] = useState("");
     let [errorMsg, setErrorMsg] = useState("");
@@ -79,6 +81,7 @@ function Registeration() {
                         {
                             document.getElementById("alert").style.backgroundColor = "#04AA6D";
                             console.log("user register successfully");
+                            navigate("/drivingschool/info", {state:response.data.agentInfo});
                         }
                         else{
                             document.getElementById("alert").style.backgroundColor = "#f44336";

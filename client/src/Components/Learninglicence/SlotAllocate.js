@@ -77,6 +77,7 @@ export default function SlotAllocate(){
             setslotBooked(true);
             setBookSlotDate(location.state.slotDate);
         }
+        console.log(location.state)
     }, [])
 
     let onChangeDate = function(event){
@@ -133,6 +134,7 @@ export default function SlotAllocate(){
                     <p>You have already booked your slot</p>
                     <p>Please go to RTO office to complete you test</p>
                     <p>You have booked slot at {bookSlotDate}</p>
+                    <p>You Learning Licence No: {location.state.learningno}</p>
                     <button className="btn btn-success" onClick={changeDate}>Change Date</button>
                 </div>
 

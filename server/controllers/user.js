@@ -146,10 +146,10 @@ exports.getDriving = async function(req, res){
         console.log(userdata);
         if(!userdata)
         {
-            return res.json({message:"Learning number does not Exist "})
+            return res.json({code: -1 ,message:"Learning number does not Exist "})
 
         }else{
-            return res.json({message:"Driving Licence Application successfully."})
+            return res.json({code:0, message:"Driving Licence Application successfully."})
         }
     }
     catch(error){
@@ -173,7 +173,7 @@ exports.getUser = async function(req, res){
             if(isValidate)
             {
                 let documentData = await document.findOne({userId: userdata._id})
-                res.json({code:0, message:"Authenticated", documentData:documentData})
+                res.json({code:0, message:"Authenticated", documentData:documentData, userdata:userdata})
             }
             else{
                 res.json({code:1, message:"Password is incorrect"})

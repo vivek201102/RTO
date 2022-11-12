@@ -34,6 +34,7 @@ function Details() {
             if(response.data.code == 0)
             {
                 alert('Uploaded succesfully!!');
+                navigate("/drivingschool/status", {state: response.data.docdata})
             }
             else{
 

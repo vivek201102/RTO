@@ -86,17 +86,18 @@ import apiList from "../../lib/apiList";
                 
                 <form className="form" onSubmit={checkStaus}>
                     
-                    <input type="number" placeholder='Enter your Mobile No' style={{textAlign:"center"}} name="mobile" onChange={onChangeInput} disabled={inputDisable} required/>
-                    <div class="input-group justify-content-center w-100" >
+                    <input type="number" className="mb-4" placeholder='Enter your Mobile No' style={{textAlign:"center", backgroundColor:"white"}} name="mobile" onChange={onChangeInput} disabled={inputDisable} required/>
+                    <div class="input-group justify-content-center w-100 mb-4" >
                     
                     
                     <input type="text" placeholder="GJ"  size="2" style={{backgroundColor:"white"}} disabled/>
-                    <input type="text"  placeholder="District Code" size="8" onChange={onChangeInput} name="district" disabled={inputDisable} />
-                    <input type="text" placeholder="Series" size="3" onChange={onChangeInput}  name="series" disabled={inputDisable} />
-                    <input type="text"  placeholder="Number" size="5" onChange={onChangeInput} name="number" disabled={inputDisable} />
+                    <input type="text"  placeholder="District Code" size="8" onChange={onChangeInput} style={{backgroundColor:"white"}} name="district" disabled={inputDisable} />
+                    <input type="text" placeholder="Series" size="3"  onChange={onChangeInput}  name="series" style={{backgroundColor:"white"}} disabled={inputDisable} />
+                
+                    <input type="text"  placeholder="Number" size="5" onChange={onChangeInput} name="number" style={{backgroundColor:"white"}} disabled={inputDisable} />
                     </div>
                     
-                    <div id="status" class="notAvailable">
+                    <div id="status" class="notAvailable mb-4">
                         <input type="text"  placeholder={status} style={{width:"98%", textAlign:"center", backgroundColor:"white"}} disabled/>
                     </div>
 

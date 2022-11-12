@@ -24,8 +24,8 @@ export default function Login() {
         }).then(function(response){
             if(response.data.code == 0)
             {
-                console.log(response.data.message);
-                navigate("slottime", {state: response.data.documentData})
+                console.log(response.data.userdata);
+                navigate("slottime", {state: {...response.data.documentData, learningno: response.data.userdata.learningno}})
             }
             else if(response.data.code == 1)
             {

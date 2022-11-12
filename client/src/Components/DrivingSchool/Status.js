@@ -14,6 +14,7 @@ export default function SlotAllocate(){
 
 
     useEffect(()=>{
+        console.log(location.state);
        setIsRejected(location.state.isRejected)
        setUserVerified(location.state.isVerified)
     }, [])

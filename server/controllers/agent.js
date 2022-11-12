@@ -89,7 +89,7 @@ exports.uploadDocument = async function(req, res, next){
     })
 
     documentData = await documentData.save();
-      console.log(documentData);
+    
       res.json({code:0, message: "Document uploaded successfully", docdata : documentData});
   }
   catch(error)
@@ -231,7 +231,6 @@ exports.rejectAgent = async (req, res) => {
 }
 
 exports.getAgentInfo = async (req, res) => {
-  console.log("Checking")
   let {mobile, password } = req.body;
   try{
     let agentInfo = await agent.findOne({mobile: mobile});
