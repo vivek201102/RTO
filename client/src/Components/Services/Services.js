@@ -2,14 +2,15 @@ import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/js/bootstrap.bundle"
 // import { Dropdown } from "bootstrap-4-react/lib/components"
 import './Services.css'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 // import Dropdown from 'react-dropdown';
 
 export default function Services() {
-    //     const [age, setAge] = React.useState('');
-
-    //   const handleChange = (event: Selec) => {
-    //     setAge(event.target.value as string);
+    let navigate = useNavigate();
+    
+    let onCheckStatus = async () => {
+        navigate("/learninglicence");
+    }
 
     return (
         <>
@@ -29,6 +30,7 @@ export default function Services() {
                                     </button>
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <Link className="dropdown-item" to="/learninglicence">Apply for Learning license</Link>
+                                        <div className="dropdown-item hov" onClick={onCheckStatus}>Status of Learning license</div>
                                         <Link className="dropdown-item" to="/drivinglicence">Apply for Driving licence</Link>
                                     </div>
                                 </div>

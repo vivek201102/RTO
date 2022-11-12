@@ -26,7 +26,7 @@ function Details() {
         formData.append("agentid", location.state._id);
        // formData.append("files", files);
         
-        axios.post(apiList.uploadDoc, formData, {
+        axios.post(apiList.uploadDocAgent, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
               },

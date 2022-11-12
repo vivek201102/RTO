@@ -77,24 +77,25 @@ exports.register = async function(req, res) {
 Upload doc of agent
 */ 
 exports.uploadDocument = async function(req, res, next){
-  
   let aadharcard = req.files[0].filename;
   let photo = req.files[1].filename;
   let signature = req.files[2].filename;
   let agentId = req.body.agentid;
   try{
-      let documentData = new agentdoc({
-          agentId,
-          aadharcard,
-          photo,
-          signature
-      })
-      let docdata = await documentData.save();
-      console.log(docdata);
-      res.json({code:0, message: "Document uploaded successfully", docdata : docdata});
+    let documentData = new agentdoc({
+      agentId,
+      aadharcard,
+      photo,
+      signature
+    })
+
+    documentData = await documentData.save();
+      console.log(documentData);
+      res.json({code:0, message: "Document uploaded successfully", docdata : documentData});
   }
   catch(error)
   {
+      console.log(error.message);
       res.json({code:-1, message:"server error...", docdata: null})
   }
 

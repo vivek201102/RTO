@@ -9,7 +9,10 @@ const documentSchema = new Schema({
     signature: {type: String, required: true},
     isVerified: {type: Boolean, default: false },
     verifiedBy: { type: String, default: null },
-    isRejected: { type: Boolean, default: false }
+    isRejected: { type: Boolean, default: false },
+    slotDate: { type: String },
+    slotTime: { type: String },
+    licenceType: {type: String }
 });
 
 module.exports = mongoose.model("Documents", documentSchema);

@@ -213,7 +213,7 @@ exports.resetPassword = async function(req, res) {
 
 exports.approveUser = async (req, res) => {
   const {userid, officerusername } = req.body;
-  console.log("In function" ,userid, officerusername)
+
   let documentdata = await document.findOne({userId: userid});
   if(documentdata)
   {
@@ -247,7 +247,7 @@ exports.approveUser = async (req, res) => {
   
 }
 
-exports.approveUser = async (req, res) => {
+exports.rejectUser = async (req, res) => {
   const {userid, officerusername } = req.body;
   console.log("In function" ,userid, officerusername)
   let documentdata = await document.findOne({userId: userid});
@@ -255,13 +255,12 @@ exports.approveUser = async (req, res) => {
   {
     documentdata.verifiedBy = officerusername;
     documentdata.isVerified = true;
-    document.isRejected = true;
-
-    let officerinfo = await officerDb.findOne({username:officerusername});
-    userinfo.save();
+    documentdata.isRejected = true;
+  
     documentdata.save();
+    let officerinfo = await officerDb.findOne({username:officerusername});
 
-    res.json({documentdata: documentdata, userinfo:userinfo, officerinfo:officerinfo});
+    res.json({documentdata: documentdata,  officerinfo:officerinfo});
     
   }
   else{
