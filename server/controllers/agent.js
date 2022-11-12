@@ -179,12 +179,23 @@ exports.getApplication = async(req, res) => {
   console.log("In function")
   let sendData = []
   try{
+
     let agentDocDatas =  await agentdoc.find({isVerified: false});
     for(let agentDocData of agentDocDatas)
     {
       let agentInfo = await agent.findOne({_id: agentDocData.agentId})
       let result = {...agentInfo.toJSON(), ...agentDocData.toJSON()}
       sendData.push(result); 
+
+    let agentDocDatas =  await agentdoc.find({});
+    for(let agentDocData of agentDocDatas)
+    {
+      console.log(agentDocData);
+      let agentInfo = await agent.findOne({_id: agentDocData.agentId})
+      console.log(agentInfo);
+      let result = {...agentInfo.toJSON(), ...agentDocData.toJSON()}
+      sendData.push(result);
+      console.log("------------------------------")
     }
     res.json({message:"Success", sendData:sendData})
   }
@@ -192,6 +203,7 @@ exports.getApplication = async(req, res) => {
   {
     res.json({code:-1, message:"server error..."})
   }
+
 }
 
 exports.approveAgent = async (req, res) => {

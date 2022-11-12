@@ -36,9 +36,13 @@ function Home() {
                     <Route path="/register" element={<Registeration />} />
                     <Route path="*" element={<NoPage />} />
                     <Route path="/learninglicence/info" element={<LearningInfo />} />
+
                     <Route path="/drivingschool/info" element={<DrivingSchool />} />
                     <Route path="/drivingschool/status" element={<DSStatus />} />
                     <Route path="/drivingschool" element={<DrivingLogin/>} />
+
+                    <Route path="/drivingschool" element={<DrivingSchool />} />
+
                     <Route path="/specialnumber" element={<SpecialNumber />} />
                     <Route path="/learninglicence/fillregisterdetails" element={<UserRegister/>}/>
                     <Route path="/learninglicence/uploaddoc" element={<Uploaddoc/>}/>
