@@ -23,7 +23,7 @@ const apiList = {
     verifyAgent:`${server}/agent/changestatus/approve`,
     rejectAgent:`${server}/agent/changestatus/reject`,
     agentLogin: `${server}/agent/checkAgent`,
-    drivingApp: `${server}/agent/drivingschool`
+    drivingApp: `${server}/agent/drivingschool`,
     authdrive:`${server}/user/getDriving`
 }
 
