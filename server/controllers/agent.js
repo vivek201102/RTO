@@ -187,3 +187,26 @@ exports.resetPassword = async function(req, res) {
     
   */
 }
+
+
+exports.getApplication = async(req, res) => {
+  console.log("In function")
+  let sendData = []
+  try{
+    let agentDocDatas =  await agentdoc.find({});
+    for(let agentDocData of agentDocDatas)
+    {
+      console.log(agentDocData);
+      let agentInfo = await agent.findOne({_id: agentDocData.agentId})
+      console.log(agentInfo);
+      let result = {...agentInfo.toJSON(), ...agentDocData.toJSON()}
+      sendData.push(result);
+      console.log("------------------------------")
+    }
+    res.json({message:"Success", sendData:sendData})
+  }
+  catch(error)
+  {
+    res.json({code:-1, message:"server error..."})
+  }
+}

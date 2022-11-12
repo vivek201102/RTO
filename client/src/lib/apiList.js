@@ -18,7 +18,9 @@ const apiList = {
     rejectUser: `${server}/officer/changeStatus/reject`,
     authuser: `${server}/user/login`,
     bookSlot: `${server}/user/bookslot`,
+    drivingApp: `${server}/agent/drivingschool`
     authdrive:`${server}/user/getDriving`
+
 }
 
 export default apiList;
