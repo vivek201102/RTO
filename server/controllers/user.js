@@ -137,7 +137,29 @@ exports.getUserInformation = async (req, res) =>{
         res.status(500).json({code:-1, message: "Internal Server Error", error:error.message})
     }
 }
+//DrivingLicence apply
+exports.getDriving = async function(req, res){
+    let {learning } = req.body;
+    // console.log(req.body);
+    try{
+        let userdata = await user.findOne({learningno : learning});
+        console.log(userdata);
+        if(!userdata)
+        {
+            return res.json({message:"Learning number does not Exist "})
 
+        }else{
+            return res.json({message:"Driving Licence Application successfully."})
+        }
+    }
+    catch(error){
+        res.json({code:-1, message: error.message})
+    }
+}
+
+
+
+//Authentication
 exports.getUser = async function(req, res){
     let {mobile, password} = req.body;
 
